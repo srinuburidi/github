@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>A2A - Customer Support Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery (Required for Bootstrap 3) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap 3 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Floating Buttons */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            line-height: 55px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .call-btn {
+            right: 20px;
+            background-color: #007bff;
+        }
+
+        .whatsapp-btn {
+            left: 20px;
+            background-color: #25D366;
+        }
+
+        /* Offcanvas Sidebar */
+        .offcanvas {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: left 0.3s ease-in-out;
+            z-index: 1050;
+        }
+
+        .offcanvas.show {
+            left: 0;
+        }
+
+        .offcanvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .offcanvas-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .offcanvas-body label {
+            font-weight: bold;
+        }
+
+        .offcanvas-body select,
+        .offcanvas-body input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .call-now {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .call-now:hover {
+            background: #0056b3;
+        }
+
+        /* Branding */
+        .brand {
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #007bff;
+
+        }
+        
+
+        /* Profile Section */
+        .profile-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Complaints Section */
+        .complaints {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 30px;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .faq-container {
+            text-align: center;
+        }
+
+        .panel-group {
+            transition: height 0.3s ease-in-out;
+        }
+
+        .faq-toggle {
+            display: block;
+            text-align: center;
+        }
+        /* Footer */
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Branding -->
+    <div class="brand">A2A</div>
+
+    <div class="container">
+        <h1 class="text-center">Customer Support Dashboard</h1>
+
+        <div class="row">
+            <!-- Profile Section -->
+             
+            <div class="col-md-4">
+                <div class="profile-card">
+                    <img src="profile.webp" alt="Profile" class="profile-img">
+                    <h3>Seetha Ramaraju</h3>
+                    <p>21 yrs</p>
+                    <p>Ram Nagar, Mithurnagar, 510039</p>
+                </div>
+            </div>
+
+            <!-- Complaints Section -->
+            <div class="col-md-8">
+                <div class="complaints">
+                    <h3>Complaints Raised by You</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item" data-toggle="popover" data-trigger="hover" title="Order misplaced"
+                            data-content="Your order was not found at the expected location.">📦 Order misplaced</li>
+                        <li class="list-group-item" data-toggle="popover" data-trigger="hover" title="Order not reached"
+                            data-content="Your package is delayed.">🚚 Order not reached</li>
+                        <li class="list-group-item" data-toggle="popover" data-trigger="hover" title="Delivery Failed"
+                            data-content="Delivery attempt failed. Please confirm address.">⚠️ Delivery Failed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FAQ Section -->
+    <div class="faq-container text-center">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+
+        <div class="panel-group" id="faqAccordion" style="max-width: 600px; margin: 0 auto;">
+            <!-- FAQ 1 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#faqAccordion" href="#faq1" class="faq-toggle">
+                            How can I track my order?
+                        </a>
+                    </h4>
+                </div>
+                <div id="faq1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Your order can be tracked using the tracking link sent to your email after purchase.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#faqAccordion" href="#faq2" class="faq-toggle">
+                            What is the return policy?
+                        </a>
+                    </h4>
+                </div>
+                <div id="faq2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        You can return items within 30 days of purchase if they are unused and in original packaging.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#faqAccordion" href="#faq3" class="faq-toggle">
+                            Do you offer international shipping?
+                        </a>
+                    </h4>
+                </div>
+                <div id="faq3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Yes, we ship worldwide. Shipping costs vary based on location.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#faqAccordion" href="#faq4" class="faq-toggle">
+                            How do I cancel my order?
+                        </a>
+                    </h4>
+                </div>
+                <div id="faq4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Orders can be canceled within 24 hours by visiting the "My Orders" section in your account.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Call Button -->
+    <button class="floating-btn call-btn" id="openCallMenu">📞</button>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas" id="callMenu">
+        <div class="offcanvas-header">
+            <span>📞 Call Support</span>
+            <button class="offcanvas-close" id="closeCallMenu">&times;</button>
+        </div>
+        <div class="offcanvas-body">
+            <label for="callLanguage">Select Language:</label>
+            <select id="callLanguage">
+                <option>English</option>
+                <option>Hindi</option>
+            </select>
+
+            <label for="callTime">Convenient Time:</label>
+            <input type="time" id="callTime">
+
+            <p><strong>Response Time:</strong> 5-10 minutes</p>
+            <button class="call-now" onclick="makeCall()">Call Now</button>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="floating-btn whatsapp-btn">💬</a>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>📞 Support: +91 98491 78191 | 📧 srinujivvettula@a2a.com</p>
+        <p>© 2025 A2A. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        $("#openCallMenu").click(() => $("#callMenu").addClass("show"));
+        $("#closeCallMenu").click(() => $("#callMenu").removeClass("show"));
+        function makeCall() {
+            alert("Calling Support");
+            window.location.href = "tel:+919849178191";
+        }
+    </script>
+
+
+</body>
+
+</html>
